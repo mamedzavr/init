@@ -1,0 +1,5 @@
+IP=$(ifconfig | grep "broadcast" | cut -d ' ' -f 6)
+
+IP=$(echo $IP | cut -d '.' -f1-3)
+
+ping -c 2 $IP &>- | arp -a | grep "$IP" | cut -d' ' -f2 | cut -c 2- | rev | cut -c 2- | rev
